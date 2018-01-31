@@ -23,7 +23,11 @@ import { PaypalProvider } from '../providers/paypal/paypal';
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {}, {
+      links: [
+        { component: LoginPage, name: 'LoginPage', segment: 'login' }
+      ]
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,17 +1,66 @@
- <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="userData.username"></ion-input>
+<ion-header no-border>
 
-    </ion-item>
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
-    </ion-item>
-  </ion-list>
+  </ion-header>
 
-  <div padding>
-    <button ion-button block (click)="signin()">Sign In</button>
-  </div>
- </ion-content>
+  <ion-content no-bounce padding>
+
+    <!-- Sign in -->
+
+    <ion-row class="app-icon-container">
+      <ion-col text-center>
+        <img src="../../assets/imgs/logo.png" />
+
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="credentialsForm">
+
+      <!--
+      <ion-input doesn't support autofocus
+      -->
+      <ion-item>
+        <ion-label floating>
+          Username
+        </ion-label>
+        <ion-input [formControl]="credentialsForm.controls['username']" type="text">
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="!credentialsForm.controls.username.valid &&
+          (credentialsForm.controls.username.dirty || submitted)" class="validator-error">
+        Please enter a valid username.
+      </div>
+
+      <ion-item>
+        <ion-label floating>
+          Password
+        </ion-label>
+        <ion-input [formControl]="credentialsForm.controls['password']" type="password"></ion-input>
+      </ion-item>
+
+      <div *ngIf="credentialsForm.controls.password.hasError('pattern') &&
+          (credentialsForm.controls.password.dirty || submitted)"
+          class="validator-error">
+        Passwords should be at least 8 characters long and contain one number, one character and one special character.
+      </div>
+
+      <ion-row class="sign-in-button-container">
+        <ion-col text-center>
+          <button ion-button block color="secondary"
+                  [disabled]="!credentialsForm.valid" (click)="signIn()">
+            Sign in
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button clear color="light" (click)="forgotPassword()">
+            Forgot your password?
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+
+  </ion-content>
