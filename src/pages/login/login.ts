@@ -30,11 +30,11 @@ export class LoginPage {
     this.credentialsForm = this.formBuilder.group({
       username: [
         '',
-        Validators.compose([Validators.pattern(regexValidators.username), Validators.required])
+        Validators.required
       ],
       password: [
         '',
-        Validators.compose([Validators.pattern(regexValidators.password), Validators.required])
+        Validators.required
       ]
     });
 
