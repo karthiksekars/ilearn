@@ -6,7 +6,8 @@
 const USERNAME_REGEXP = /^[A-Za-z0-9]+(?:[_][A-Za-z0-9]+)*$/;
 
 // Passwords should be at least 8 characters long and should contain one number, one character and one special character.
-const PASSWORD_REGEXP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+//const PASSWORD_REGEXP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+const PASSWORD_REGEXP = /^[A-Za-z0-9]+(?:[_][A-Za-z0-9]+)*$/;
 
 export const regexValidators = {
   username: USERNAME_REGEXP,
