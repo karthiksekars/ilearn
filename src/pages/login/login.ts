@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
-import { regexValidators } from '../../pages/validators/validator';
+//import { regexValidators } from '../../pages/validators/validator';
 
 /**
  * Generated class for the LoginPage page.
@@ -20,22 +22,14 @@ import { regexValidators } from '../../pages/validators/validator';
 export class LoginPage {
 
   responseData : any;
-
   public credentialsForm: FormGroup;
-
   public submitted: boolean = false;
 
-  constructor(public navCtrl: NavController, public authServiceProvider:AuthServiceProvider, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public authServiceProvider:AuthServiceProvider, private formBuilder: FormBuilder, public loadingCtrl: LoadingController, private storage: Storage) {
 
     this.credentialsForm = this.formBuilder.group({
-      username: [
-        '',
-        Validators.required
-      ],
-      password: [
-        '',
-        Validators.required
-      ]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
   }
@@ -48,12 +42,27 @@ export class LoginPage {
 
     this.submitted = true;
 
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+
     if (this.credentialsForm.valid) {
 
-    this.authServiceProvider.loginUser(this.credentialsForm.value,'moodle_mobile_app').then((result) => {
-     this.responseData = result;
-     if(this.responseData){
-     console.log(result);
+      loader.present();
+
+
+    this.authServiceProvider.loginUser(this.credentialsForm.value,'moodle_mobile_app').then((objAPIResponce) => {
+     this.responseData = objAPIResponce;
+     if(this.responseData.token){
+      this.storage.clear();
+       this.storage.set('__token', this.responseData.token);
+       this.storage.ready().then(() => {
+        this.storage.get('__token').then((__token) => {
+          console.log('Your token is', __token);
+        });
+       });
+
+       loader.dismissAll();
      }
    }, (err) => {
      // Error log
@@ -65,7 +74,5 @@ export class LoginPage {
  forgotPassword(){
 
  }
-
-
 
 }

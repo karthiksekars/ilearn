@@ -10,9 +10,13 @@ export class HomePage {
   userDetails : any;
   responseData: any;
 
-  userPostData = {"wstoken":"123123"};
+  userPostData = {"wstoken":""};
 
   constructor(public navCtrl: NavController) {
+
+  }
+
+  logout(){
 
   }
 

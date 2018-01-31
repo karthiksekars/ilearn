@@ -3,16 +3,14 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-import { PaypalProvider } from '../providers/paypal/paypal';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -23,10 +21,10 @@ import { PaypalProvider } from '../providers/paypal/paypal';
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
-    IonicModule.forRoot(MyApp, {}, {
-      links: [
-        { component: LoginPage, name: 'LoginPage', segment: 'login' }
-      ]
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: '__ilearn',
+      driverOrder: ['sqlite', 'websql', 'indexeddb']
     })
   ],
   bootstrap: [IonicApp],
@@ -41,7 +39,6 @@ import { PaypalProvider } from '../providers/paypal/paypal';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
-    PaypalProvider,
   ]
 })
 export class AppModule {}
