@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController, ViewController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 //import { regexValidators } from '../../pages/validators/validator';
@@ -25,13 +24,25 @@ export class LoginPage {
   public credentialsForm: FormGroup;
   public submitted: boolean = false;
 
-  constructor(public navCtrl: NavController, public authServiceProvider:AuthServiceProvider, private formBuilder: FormBuilder, public loadingCtrl: LoadingController, private storage: Storage) {
+  constructor(
+    public navCtrl: NavController,
+    public authServiceProvider:AuthServiceProvider,
+    private formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController,
+    private storage: Storage,
+    private alertCtrl: AlertController,
+    private viewCtrl: ViewController
+  ) {
 
     this.credentialsForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
 
+  }
+
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
   }
 
   ionViewDidLoad() {
@@ -50,7 +61,6 @@ export class LoginPage {
 
       loader.present();
 
-
     this.authServiceProvider.loginUser(this.credentialsForm.value,'moodle_mobile_app').then((objAPIResponce) => {
      this.responseData = objAPIResponce;
      if(this.responseData.token){
@@ -61,18 +71,34 @@ export class LoginPage {
           console.log('Your token is', __token);
         });
        });
-
        loader.dismissAll();
+       window.location.reload();
      }
-   }, (err) => {
-     // Error log
-   });
-  }
+     else{
+      loader.dismissAll();
+      this.alertCtrl.create({
+        title: 'Invalid Login',
+        subTitle: this.responseData.error,
+        buttons: ['OK']
+      })
+      .present();
+     }
 
+   }, (err) => {
+     console.log(err);
+   });
+
+  }
  }
 
  forgotPassword(){
 
  }
+
+ logout(){
+   console.log('logged out');
+   this.storage.clear();
+   window.location.reload();
+  }
 
 }

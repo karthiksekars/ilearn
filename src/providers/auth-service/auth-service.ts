@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-let apiUrl = 'http://14.1.197.36/lms-upgraded/login/token.php';
+let apiAuthUrl = 'http://14.1.197.36/lms-upgraded/login/token.php';
+let apiInfoUrl = 'https://www.csc-crowddynamics.com/csa/webservice/rest/server.php';
 
 /*
   Generated class for the AuthServiceProvider provider.
@@ -15,15 +16,13 @@ let apiUrl = 'http://14.1.197.36/lms-upgraded/login/token.php';
 export class AuthServiceProvider {
 
   constructor(public http : Http, public httpClientModule : HttpClientModule) {
-    console.log('Hello AuthServiceProvider Provider');
+    //console.log('Hello AuthServiceProvider Provider');
   }
 
   // Login user
   loginUser(credentials, apiMethod) {
     return new Promise((resolve, reject) => {
-      let headers = new Headers();
-
-      this.http.get(apiUrl + '?service=' + apiMethod + '&username=' + credentials.username + '&password=' + credentials.password)
+      this.http.get(apiAuthUrl + '?service=' + apiMethod + '&username=' + credentials.username + '&password=' + credentials.password)
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
@@ -32,12 +31,23 @@ export class AuthServiceProvider {
     });
   }
 
+  //Get User Info
+  getUserInfo(strToken){
+    return new Promise((resolve, reject) => {
+      this.http.get(apiInfoUrl + '?wsfunction=core_user_view_user_profile&wstoken=' + strToken)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 
   postData(credentials, apiMethod) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + '?service=' + apiMethod, JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiAuthUrl + '?service=' + apiMethod, JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {

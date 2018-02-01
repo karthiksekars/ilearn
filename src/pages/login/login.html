@@ -15,9 +15,6 @@
 
     <form [formGroup]="credentialsForm">
 
-      <!--
-      <ion-input doesn't support autofocus
-      -->
       <ion-item>
         <ion-label floating>
           Username
@@ -26,8 +23,7 @@
         </ion-input>
       </ion-item>
 
-      <div *ngIf="!credentialsForm.controls.username.valid &&
-          (credentialsForm.controls.username.dirty || submitted)" class="validator-error">
+      <div *ngIf="!credentialsForm.controls.username.valid && submitted" class="validator-error">
         Please enter a valid username.
       </div>
 
@@ -38,8 +34,7 @@
         <ion-input [formControl]="credentialsForm.controls['password']" type="password"></ion-input>
       </ion-item>
 
-      <div *ngIf="credentialsForm.controls.password.hasError('pattern') &&
-          (credentialsForm.controls.password.dirty || submitted)"
+      <div *ngIf="!credentialsForm.controls.password.valid && submitted"
           class="validator-error">
           Please enter a valid passwords.
       </div>

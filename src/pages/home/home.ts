@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { App, NavController } from 'ionic-angular';
+import { NavController, ViewController  } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -10,13 +13,15 @@ export class HomePage {
   userDetails : any;
   responseData: any;
 
-  userPostData = {"wstoken":""};
-
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    private storage: Storage,
+    private viewCtrl: ViewController
+  ) {
 
   }
 
-  logout(){
+  ionViewCanEnter(){
 
   }
 

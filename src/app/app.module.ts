@@ -24,7 +24,7 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: '__ilearn',
-      driverOrder: ['sqlite', 'websql', 'indexeddb']
+      driverOrder: ['indexeddb', 'websql', 'sqlite']
     })
   ],
   bootstrap: [IonicApp],
