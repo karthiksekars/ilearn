@@ -11,13 +11,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
+import { MycoursesPage } from '../pages/mycourses/mycourses';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    LoginPage
+    LoginPage,
+    MycoursesPage,
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
@@ -32,7 +34,8 @@ import { IonicStorageModule } from '@ionic/storage';
     MyApp,
     HomePage,
     ListPage,
-    LoginPage
+    LoginPage,
+    MycoursesPage,
   ],
   providers: [
     StatusBar,

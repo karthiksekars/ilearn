@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
-
+import { MycoursesPage } from '../pages/mycourses/mycourses';
 @Component({
   templateUrl: 'app.html'
 })
@@ -31,7 +31,7 @@ export class MyApp {
           this.rootPage = LoginPage;
       }
       else{
-          this.rootPage = HomePage;
+          this.rootPage = MycoursesPage;
       }
     });
 
