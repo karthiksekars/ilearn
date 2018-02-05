@@ -4,7 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 let apiAuthUrl = 'https://www.csc-crowddynamics.com/csa/login/token.php';
-let apiInfoUrl = 'http://www.csc-crowddynamics.com/csa/webservice/rest/server.php';
+
+let apiInfoUrl = 'https://www.csc-crowddynamics.com/csa/webservice/rest/server.php';
+
 
 /*
   Generated class for the AuthServiceProvider provider.
@@ -20,9 +22,10 @@ export class AuthServiceProvider {
   }
 
   // Login user
-  loginUser(credentials, apiMethod) {
+  loginUser(credentials) {
     return new Promise((resolve, reject) => {
-      this.http.get(apiAuthUrl + '?service=' + apiMethod + '&username=' + credentials.username + '&password=' + credentials.password)
+      this.http.get(apiAuthUrl + '?service=moodle_mobile_app&username=' + credentials.username
+      + '&password=' + credentials.password)
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
@@ -32,15 +35,27 @@ export class AuthServiceProvider {
   }
 
   //Get User Info
-  getUserInfo(strToken){
+  getUserInfo(strToken, strUsername){
+
+    let arrUserInfoQuerey = {
+      'service':'core_user_view_user_profile',
+      'wstoken':strToken,
+      'field':'username',
+      'values' : strUsername
+    };
+
     return new Promise((resolve, reject) => {
-      this.http.get(apiInfoUrl + '?wsfunction=core_user_view_user_profile&wstoken=' + strToken)
+      let headers = new Headers();
+      headers.append('service', 'core_user_view_user_profile');
+
+      this.http.post(apiInfoUrl, arrUserInfoQuerey, {headers: headers})
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
           reject(err);
         });
     });
+
   }
 
   postData(credentials, apiMethod) {

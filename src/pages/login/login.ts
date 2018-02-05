@@ -61,7 +61,7 @@ export class LoginPage {
 
       loader.present();
 
-    this.authServiceProvider.loginUser(this.credentialsForm.value,'moodle_mobile_app').then((objAPIResponce) => {
+    this.authServiceProvider.loginUser(this.credentialsForm.value).then((objAPIResponce) => {
      this.responseData = objAPIResponce;
      if(this.responseData.token){
       this.storage.clear();
@@ -69,6 +69,12 @@ export class LoginPage {
        this.storage.ready().then(() => {
         this.storage.get('__token').then((__token) => {
           console.log('Your token is', __token);
+          /*this.authServiceProvider.getUserInfo(this.responseData.token, this.credentialsForm.value.username).then((objUserAPIResponce) => {
+            console.log(objUserAPIResponce);
+
+          }, (err) => {
+            console.log(err);
+          });*/
         });
        });
        loader.dismissAll();
