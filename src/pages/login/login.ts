@@ -78,8 +78,7 @@ export class LoginPage {
         });
        });
        loader.dismissAll();
-       //window.location.reload();
-       this.navCtrl.push(MycoursesPage);
+       window.location.reload();
      }
      else{
       loader.dismissAll();

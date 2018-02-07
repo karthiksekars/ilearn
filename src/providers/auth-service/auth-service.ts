@@ -40,13 +40,12 @@ export class AuthServiceProvider {
     let arrUserInfoQuerey = {
       'service':'core_user_view_user_profile',
       'wstoken':strToken,
-      'field':'username',
-      'values' : strUsername
+      'username' : strUsername
     };
 
     return new Promise((resolve, reject) => {
       let headers = new Headers();
-      headers.append('service', 'core_user_view_user_profile');
+      //headers.append('service', 'core_user_view_user_profile');
 
       this.http.post(apiInfoUrl, arrUserInfoQuerey, {headers: headers})
         .subscribe(res => {
