@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController  } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
-
-import { LoginPage } from '../login/login';
+//import { NavController, ViewController  } from 'ionic-angular';
+//import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -13,11 +11,7 @@ export class HomePage {
   userDetails : any;
   responseData: any;
 
-  constructor(
-    public navCtrl: NavController,
-    private storage: Storage,
-    private viewCtrl: ViewController
-  ) {
+  constructor() {
 
   }
 

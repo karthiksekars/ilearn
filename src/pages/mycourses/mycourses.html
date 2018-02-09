@@ -5,11 +5,12 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>mycourses</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Course</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -18,7 +19,7 @@
     <ion-item *ngFor="let data of responseData">
       <ion-card>
         <img src="{{ data.description }}" />
-        <div class="card-title">{{ data.name }}</div>        
+        <div class="card-title">{{ data.name }}</div>
       </ion-card>
     </ion-item>
   </ion-list>

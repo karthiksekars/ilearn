@@ -3,7 +3,7 @@ import { IonicPage, NavController, LoadingController, AlertController, ViewContr
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
-import { MycoursesPage } from '../mycourses/mycourses';
+//import { MycoursesPage } from '../mycourses/mycourses';
 //import { regexValidators } from '../../pages/validators/validator';
 
 /**
