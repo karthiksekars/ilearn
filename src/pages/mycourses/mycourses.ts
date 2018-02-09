@@ -33,7 +33,12 @@ export class MycoursesPage {
     this.authServiceProvider.getcource(privetetoke,'core_course_get_categories').then((result) => {
       this.responseData = result;
       if(this.responseData){
-        console.log(result);
+        this.responseData.forEach(function (value) {
+          var reg =  /<img.*?src="([^">]*\/([^">]*?))".*?>/g
+          var imageurl = reg.exec(value.description);
+          value.description = imageurl[1]+"?token="+privetetoke; 
+          console.log(value);
+        });
       }
     }, (err) => {
       // Error log

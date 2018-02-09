@@ -13,8 +13,12 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="card-background-page">
   <ion-list>
-     <ion-item *ngFor="let data of responseData">{{data.name}}</ion-item>
-   </ion-list>
- </ion-content>
+    <ion-item *ngFor="let data of responseData">
+      <ion-card>
+        <img src="{{ data.description }}" />
+        <div class="card-title">{{ data.name }}</div>        
+      </ion-card>
+    </ion-item>
+  </ion-list>
