@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
@@ -35,39 +35,26 @@ export class AuthServiceProvider {
   }
 
   //Get User Info
-  getUserInfo(strToken, strUsername){
+  getUserInfo(strToken:any, strUsername:any){
 
-    let arrUserInfoQuerey = {
-      'service':'core_user_view_user_profile',
-      'wstoken':strToken,
-      'username' : strUsername
-    };
+    let userDate;
 
     return new Promise((resolve, reject) => {
-      let headers = new Headers();
-      //headers.append('service', 'core_user_view_user_profile');
-
-      this.http.post(apiInfoUrl, arrUserInfoQuerey, {headers: headers})
+      this.http.get(apiInfoUrl + '?wsfunction=core_user_get_users_by_field&field=username&values[0]=' + strUsername + '&wstoken=' + strToken + '&moodlewsrestformat=json')
         .subscribe(res => {
-          resolve(res.json());
+          userDate = res.json();
+          if(userDate.length){
+            resolve(userDate[0]);
+          }
+          else{
+            resolve(null);
+          }
+
         }, (err) => {
           reject(err);
         });
     });
 
-  }
-
-  postData(credentials, apiMethod) {
-    return new Promise((resolve, reject) => {
-      let headers = new Headers();
-
-      this.http.post(apiAuthUrl + '?service=' + apiMethod, JSON.stringify(credentials), {headers: headers})
-        .subscribe(res => {
-          resolve(res.json());
-        }, (err) => {
-          reject(err);
-        });
-    });
   }
 
   getcource(token,apiMethod){
