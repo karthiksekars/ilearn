@@ -68,17 +68,22 @@ export class LoginPage {
        this.storage.set('__token', this.responseData.token);
        this.storage.ready().then(() => {
         this.storage.get('__token').then((__token) => {
-          console.log('Your token is', __token);
-          /*this.authServiceProvider.getUserInfo(this.responseData.token, this.credentialsForm.value.username).then((objUserAPIResponce) => {
-            console.log(objUserAPIResponce);
-
+          this.authServiceProvider.getUserInfo(this.responseData.token, this.credentialsForm.value.username).then((objUserAPIResponce) => {
+            this.storage.set('__userinfo', JSON.stringify(objUserAPIResponce));
+            loader.dismissAll();
+            window.location.reload();
           }, (err) => {
             console.log(err);
-          });*/
+            this.alertCtrl.create({
+              title: 'Invalid Action, try again.',
+              subTitle: this.responseData.error,
+              buttons: ['OK']
+            })
+            .present();
+          });
         });
        });
-       loader.dismissAll();
-       window.location.reload();
+
      }
      else{
       loader.dismissAll();
@@ -100,11 +105,5 @@ export class LoginPage {
  forgotPassword(){
 
  }
-
- logout(){
-   console.log('logged out');
-   this.storage.clear();
-   window.location.reload();
-  }
 
 }

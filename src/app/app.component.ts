@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -21,7 +21,8 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private storage: Storage
+    private storage: Storage,
+    public loadingCtrl: LoadingController,
   ) {
 
     // User Validation
@@ -30,7 +31,7 @@ export class MyApp {
           this.rootPage = LoginPage;
       }
       else{
-          this.rootPage = MycoursesPage;
+          this.rootPage = HomePage;
       }
     });
 
@@ -58,4 +59,10 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  logout(){
+    console.log('logged out');
+    this.storage.clear();
+    this.nav.push(LoginPage);
+   }
 }
