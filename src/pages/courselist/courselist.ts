@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { Storage } from '@ionic/storage';
+import { EnrollPage } from '../enroll/enroll';
 /**
  * Generated class for the CourselistPage page.
  *
@@ -40,6 +41,13 @@ export class CourselistPage {
     }, (err) => {
       // Error log
     });
+  }
+
+  enrollMe(intCourseId, strCourseFullName) {
+    this.navCtrl.push(EnrollPage, {
+      intCourseId:intCourseId,
+      strCourseFullName:strCourseFullName
+    })
   }
 
 }

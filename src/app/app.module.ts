@@ -12,6 +12,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { MycoursesPage } from '../pages/mycourses/mycourses';
 import { CourselistPage } from '../pages/courselist/courselist';
+import { EnrollPage} from '../pages/enroll/enroll';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CourselistPage } from '../pages/courselist/courselist';
     LoginPage,
     MycoursesPage,
     CourselistPage,
+    EnrollPage
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
@@ -36,6 +38,7 @@ import { CourselistPage } from '../pages/courselist/courselist';
     LoginPage,
     MycoursesPage,
     CourselistPage,
+    EnrollPage
   ],
   providers: [
     StatusBar,
