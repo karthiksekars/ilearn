@@ -20,9 +20,9 @@ export class CourselistPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.navParams.data);
+    //console.log(this.navParams.data);
     this.storage.get('__token').then((__token) => {
-      console.log('Your token is', __token);
+      //console.log('Your token is', __token);
       this.getcourselist(__token,this.navParams.data);
     });
     

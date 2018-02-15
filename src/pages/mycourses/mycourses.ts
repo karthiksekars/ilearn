@@ -24,7 +24,7 @@ export class MycoursesPage {
     //console.log('ionViewDidLoad MycoursesPage');
     //this.getcources();
     this.storage.get('__token').then((__token) => {
-      console.log('Your token is', __token);
+      //console.log('Your token is', __token);
       this.getcources(__token);
     });
   }
@@ -38,7 +38,7 @@ export class MycoursesPage {
           var reg =  /<img.*?src="([^">]*\/([^">]*?))".*?>/g
           var imageurl = reg.exec(value.description);
           value.description = imageurl[1]+"?token="+privetetoke; 
-          console.log(value);
+          //console.log(value);
         });
       }
     }, (err) => {
