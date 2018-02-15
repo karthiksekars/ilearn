@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { CourselistPage } from '../courselist/courselist';
 import { Storage } from '@ionic/storage';
 /**
  * Generated class for the MycoursesPage page.
@@ -45,5 +46,8 @@ export class MycoursesPage {
     });
     
   }
+  coursedtail(courseid){
+    this.navCtrl.push(CourselistPage,courseid);     
+   }
 
 }

@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { MycoursesPage } from '../pages/mycourses/mycourses';
+import { CourselistPage } from '../pages/courselist/courselist';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MycoursesPage } from '../pages/mycourses/mycourses';
     HomePage,
     LoginPage,
     MycoursesPage,
+    CourselistPage,
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
@@ -33,6 +35,7 @@ import { MycoursesPage } from '../pages/mycourses/mycourses';
     HomePage,
     LoginPage,
     MycoursesPage,
+    CourselistPage,
   ],
   providers: [
     StatusBar,

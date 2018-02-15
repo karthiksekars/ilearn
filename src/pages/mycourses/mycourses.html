@@ -17,7 +17,7 @@
 <ion-content class="card-background-page">
   <ion-list>
     <ion-item *ngFor="let data of responseData">
-      <ion-card>
+      <ion-card (click)="coursedtail(data.id)">
         <img src="{{ data.description }}" />
         <div class="card-title">{{ data.name }}</div>
       </ion-card>

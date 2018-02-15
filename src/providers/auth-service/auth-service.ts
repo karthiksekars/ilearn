@@ -81,4 +81,17 @@ export class AuthServiceProvider {
     });
   }
 
+  getcourselist(token,apiMethod){
+    return new Promise((resolve, reject) => {
+      this.http.get(apiInfoUrl + '?wsfunction=' + apiMethod + '&wstoken=' + token + '&moodlewsrestformat=json' + '&field=')
+        .subscribe(res => {
+          resolve(res.json().courses);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }
+
+
