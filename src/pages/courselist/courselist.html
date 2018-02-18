@@ -12,11 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
-  <div *ngFor="let data of responseData">    
-      <div *ngIf="data.categoryid == this.navParams.data">
-        <ion-item (click)="enrollMe(data.id, data.fullname)"><h1>{{ data.displayname }}</h1></ion-item>
-      </div>
-  </div>
+  <course-details></course-details>
 </ion-content>

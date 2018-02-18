@@ -14,6 +14,8 @@ import { MycoursesPage } from '../pages/mycourses/mycourses';
 import { CourselistPage } from '../pages/courselist/courselist';
 import { EnrollPage} from '../pages/enroll/enroll';
 
+import { ComponentsModule } from '../components/components.module';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -21,10 +23,10 @@ import { EnrollPage} from '../pages/enroll/enroll';
     LoginPage,
     MycoursesPage,
     CourselistPage,
-    EnrollPage
+    EnrollPage   
   ],
   imports: [
-    BrowserModule, HttpModule, HttpClientModule,
+    BrowserModule, HttpModule, HttpClientModule, ComponentsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: '__ilearn',
